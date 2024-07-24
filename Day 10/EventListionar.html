@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventListener</title>
+    <style>
+        #form{
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            width: 500px;
+            justify-content: center;
+            align-items: center;
+            background-color: violet;
+        }
+
+        #myForm1{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            width: 300px;
+            margin-left: 5rem;
+            gap: 0.5rem;
+        }
+
+        .option{
+            justify-content: center;
+            align-items: center;
+            margin-left: 5rem;
+            margin-top: 1rem;
+        }
+
+        #myList{
+            background-color: violet;
+        }
+        .list{
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2 class="paragraph">
+            This is paragraph
+        </h2>
+        <button id="button">Change the context</button>
+        <br>
+        <img class="image" width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop">
+        <h2 class="paragraph1">
+            This is paragraph
+        </h2>
+        <div id="form">
+            <form action="">
+                <h1>Keyboard Event</h1>
+                <h3>Keydown</h3>
+                <input id="keydownInput" type="text" name="">
+                <h4>Keyup</h4>
+                <input id="keyupInput" type="text" name="">
+                <p id="displayParagraph"></p>
+            </form>
+        </div>
+
+        
+       <div id="myForm">
+        <form id="myForm1">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <button type="submit">Submit</button>
+        </form>
+       </div>
+
+       <div class="option">
+        <label for="option">Choose an option</label>
+        <select name="option" id="mySelect">
+            <option value="option 1">Option 1</option>
+            <option value="option 2">Option 2</option>
+            <option value="option 3">Option 3</option>
+        </select>
+
+        <p id="SelectedValue">Selected value will be displayed here</p>
+       </div>
+
+        <h3 id="myhero">hero</h3>
+
+        <ul id="myList">
+            <li class="list">List 1</li>
+            <li class="list">List 2</li>
+            <li class="list">List 3</li>
+            <li class="list">List 3</li>
+        </ul>
+
+        <div class="parentDiv">
+            <button id="addElement">Add element</button>
+            <ul class="element">
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Task 1
+        let para = document.querySelector('.paragraph')
+        document.querySelector('#button').addEventListener('click', function(e){
+            para.innerHTML = 'changed paragraph'
+        })
+
+        // Task 2
+        let image = document.querySelector('.image')
+        image.addEventListener('dblclick', function(e){
+            if(image.style.display === 'none'){
+                image.style.display = 'block';
+            } else {
+                image.style.display = 'none';
+            }
+        })
+
+        // Task 3
+        let para1 = document.querySelector('.paragraph1')
+        para1.addEventListener('mouseover', function(e){
+            para1.style.backgroundColor = "red"
+        })  
+
+        // Task 4
+        para1.addEventListener('mouseout', function(e){
+            para1.style.backgroundColor = "blueviolet"
+        })
+
+        // Task 5
+        let keydownInput = document.querySelector('#keydownInput')
+        keydownInput.addEventListener('keydown', function(e) {
+            console.log(keydownInput.value)
+            console.log('Key pressed:', e.key);
+            // alert('key is pressed')
+            // keydownInput.style.backgroundColor = "red"
+        });
+
+        // Task 6
+        let keyupInput = document.querySelector('#keyupInput')
+        let displayParagraph = document.querySelector('#displayParagraph')
+        keyupInput.addEventListener('keyup', function(e) {
+            displayParagraph.textContent = keyupInput.value;
+        });
+
+        // Task 7
+        const form = document.querySelector('#myForm1')
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            // console.log(form)
+
+            const formData = new FormData(form)
+            
+            for (const [name, value] of formData) {
+                console.log(`${name}: ${value}`);
+            }
+        })
+
+        // Task 8
+        const select = document.getElementById('mySelect')
+        const paragraph = document.querySelector('#selectedValue');
+        select.addEventListener('change', (e)=>{
+            console.log(paragraph)
+            paragraph.textContent = `${select.value}`
+        })
+        
+        // Task 9
+        const list = document.getElementById('myList')
+        list.addEventListener('click',(e)=>{
+            if(e.target && e.target.nodeName){
+                console.log('List Item Text :',event.target.textContent)
+            }
+        })
+
+        // Task 10
+        const parentDiv = document.querySelector('.parentDiv');
+        const button = document.getElementById('addElement')
+        const ul = document.querySelector('.element');
+
+        parentDiv.addEventListener('click', (e) => {
+        if (e.target && e.target.tagName === 'LI') {
+            console.log('Text item content:', e.target.textContent);
+          }
+        });
+
+
+        button.addEventListener('click',(e)=>{
+            const newList = document.createElement('li')
+            newList.textContent = 'New items : ' + (ul.children.length + 1)
+            ul.appendChild(newList)
+        })
+
+    </script>
+</body>
+</html>
