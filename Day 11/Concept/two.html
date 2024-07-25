@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="head">Chai aur Code</h1>
+        <button id="stop">Stop</button>
+        <button id="start">Start</button>
+    </div>
+
+    <script>
+        const content = document.querySelector("#head")
+        const say = function(){
+            console.log('Vipin')
+        }
+
+        const changeContent = function(){
+            content.textContent = "Chai aur Code at your home"
+        }
+        const changeMe = setTimeout(changeContent,2000)
+
+        document.querySelector('#stop').addEventListener('click',(e)=>{
+            clearTimeout(changeMe)
+            console.log("Stopped")
+        })
+
+        setInterval(function(){
+            console.log("Vipin", Date.now())
+        },2000)
+    </script>
+</body>
+</html>
+
