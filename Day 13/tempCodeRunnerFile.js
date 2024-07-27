@@ -1,0 +1,1 @@
+const sum = add1(2,2)
